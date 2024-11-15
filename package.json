@@ -8,8 +8,8 @@
     "circular",
     "safe"
   ],
-  "homepage": "https://github.com/paulsmithkc/json-stringify-safe",
-  "bugs": "https://github.com/paulsmithkc/json-stringify-safe/issues",
+  "homepage": "https://github.com/moll/json-stringify-safe",
+  "bugs": "https://github.com/moll/json-stringify-safe/issues",
   "contributors": [
     "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
     "Andri Möll <andri@dot.ee> (http://themoll.com)",
@@ -18,7 +18,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/isaacs/json-stringify-safe"
+    "url": "git://github.com/moll/json-stringify-safe"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
