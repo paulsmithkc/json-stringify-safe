@@ -13,6 +13,7 @@
   "contributors": [
     "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
     "Andri Möll <andri@dot.ee> (http://themoll.com)",
+    "Luka Maljic <luka@maljic.com> (https://codecraft.dev)",
     "Paul Smith <paul@paulsmith.dev> (https://paulsmith.dev)"
   ],
   "license": "ISC",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@swc/core": "^1.9.2",
     "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
     "eslint": "^9.14.0",
     "jest": "^29.5.0",
     "prettier": "^3.3.3",

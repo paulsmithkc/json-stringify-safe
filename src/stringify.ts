@@ -2,22 +2,26 @@
 
 export type EntryProcessor = (key: string, value: any) => any;
 
+export interface BigIntEx extends BigInt {
+  toJSON?(): any;
+}
+
 function stringify(
   obj: any,
   replacer?: EntryProcessor | string[] | null,
   space?: string | number | null,
-  cycleReplacer?: EntryProcessor | null
+  cycleReplacer?: EntryProcessor | null,
 ): string {
   return JSON.stringify(
     obj,
     serializer(replacer, cycleReplacer),
-    space ?? undefined
+    space ?? undefined,
   );
 }
 
 function serializer(
   replacer?: EntryProcessor | string[] | null,
-  cycleReplacer?: EntryProcessor | null
+  cycleReplacer?: EntryProcessor | null,
 ): EntryProcessor {
   const stack: unknown[] = [];
   const keys: string[] = [];
@@ -25,12 +29,15 @@ function serializer(
   if (!cycleReplacer) {
     cycleReplacer = (_key, value) =>
       stack[0] === value
-        ? '[Circular ~]'
-        : '[Circular ~.' + keys.slice(0, stack.indexOf(value)).join('.') + ']';
+        ? "[Circular ~]"
+        : "[Circular ~." + keys.slice(0, stack.indexOf(value)).join(".") + "]";
   }
 
-
   return function (key, value) {
+    if (typeof value === "bigint") {
+      value = value.toString();
+    }
+
     if (stack.length > 0) {
       const thisPos = stack.indexOf(this);
       ~thisPos ? stack.splice(thisPos + 1) : stack.push(this);
@@ -44,7 +51,7 @@ function serializer(
 
     if (!replacer) {
       return value;
-    } else if (typeof replacer === 'function') {
+    } else if (typeof replacer === "function") {
       return replacer.call(this, key, value);
     } else if (Array.isArray(replacer)) {
       return !key || replacer.includes(key) ? value : undefined;

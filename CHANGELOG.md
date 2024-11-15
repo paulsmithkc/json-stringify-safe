@@ -23,3 +23,4 @@
 # 5.0.4 (Nov 15, 2024)
 
 - Implement array replacers [Issue #14](https://github.com/moll/json-stringify-safe/issues/14)
+- BigInt support [PR #35](https://github.com/moll/json-stringify-safe/pull/35)

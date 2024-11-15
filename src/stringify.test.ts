@@ -8,6 +8,14 @@ function bangString(_key: string, value: unknown): unknown {
   return typeof value == "string" ? value + "!" : value;
 }
 
+interface BigIntEx extends BigInt {
+  toJSON?(): any;
+}
+
+beforeEach(() => {
+  delete (BigInt.prototype as BigIntEx).toJSON;
+});
+
 describe("stringify", function () {
   it("must use space parameter", function () {
     const obj: any = { name: "Alice" };
@@ -275,7 +283,40 @@ describe("stringify", function () {
   });
 
   it("handle object replacer", function () {
-    expect(JSON.stringify({ a: "b", c: "d" }, { a: "a" } as any)).toEqual('{"a":"b","c":"d"}');
-    expect(stringify({ a: "b", c: "d" }, { a: "a" } as any)).toEqual('{"a":"b","c":"d"}');
+    expect(JSON.stringify({ a: "b", c: "d" }, { a: "a" } as any)).toEqual(
+      '{"a":"b","c":"d"}',
+    );
+    expect(stringify({ a: "b", c: "d" }, { a: "a" } as any)).toEqual(
+      '{"a":"b","c":"d"}',
+    );
+  });
+
+  it("must stringify BigInts (w/ toString())", function () {
+    const bigint = 1n;
+    expect(() => JSON.stringify(bigint)).toThrow(
+      "Do not know how to serialize a BigInt",
+    );
+    expect(stringify(bigint)).toEqual('"1"');
+  });
+
+  it("must stringify BigInts (w/ toJson())", function () {
+    const bigint = 2n;
+    (BigInt.prototype as BigIntEx).toJSON = function (this: BigInt) {
+      return Number(this);
+    };
+    expect(JSON.stringify(bigint)).toEqual("2");
+    expect(stringify(bigint)).toEqual("2");
+  });
+
+  it("must stringify circular objects with BigInts", function () {
+    const obj: any = { n: 3n };
+    obj.self = obj;
+
+    expect(stringify(obj, null, 2)).toEqual(
+      jsonify({
+        n: "3",
+        self: "[Circular ~]",
+      }),
+    );
   });
 });
