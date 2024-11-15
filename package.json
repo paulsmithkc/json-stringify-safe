@@ -8,10 +8,10 @@
     "circular",
     "safe"
   ],
-  "homepage": "https://github.com/isaacs/json-stringify-safe",
-  "bugs": "https://github.com/isaacs/json-stringify-safe/issues",
-  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
+  "homepage": "https://github.com/paulsmithkc/json-stringify-safe",
+  "bugs": "https://github.com/paulsmithkc/json-stringify-safe/issues",
   "contributors": [
+    "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
     "Andri Möll <andri@dot.ee> (http://themoll.com)",
     "Paul Smith <paul@paulsmith.dev> (https://paulsmith.dev)"
   ],
