@@ -1,6 +1,6 @@
 # json-stringify-safe
 
-Like JSON.stringify, but doesn't throw on circular references.
+Like JSON.stringify, but doesn't throw on circular references or BigInt values.
 
 ## Usage
 
@@ -11,6 +11,7 @@ import { stringify } from "@merlin4/json-stringify-safe";
 const circularObj = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [circularObj, circularObj];
+circularObj.bigint = 1n;
 console.log(stringify(circularObj, null, 2));
 ```
 
@@ -19,7 +20,8 @@ Output:
 ```json
 {
   "circularRef": "[Circular]",
-  "list": ["[Circular]", "[Circular]"]
+  "list": ["[Circular]", "[Circular]"],
+  "bigint": "1"
 }
 ```
 
