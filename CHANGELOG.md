@@ -1,8 +1,9 @@
 ## 5.0.1 (May 19, 2015)
+
 - Fixes stringify to only take ancestors into account when checking
-  circularity.  
+  circularity.
   It previously assumed every visited object was circular which led to [false
-  positives][issue9].  
+  positives][issue9].
   Uses the tiny serializer I wrote for [Must.js][must] a year and a half ago.
 - Fixes calling the `replacer` function in the proper context (`thisArg`).
 - Fixes calling the `cycleReplacer` function in the proper context (`thisArg`).
@@ -12,3 +13,9 @@
 
 [must]: https://github.com/moll/js-must
 [issue9]: https://github.com/isaacs/json-stringify-safe/issues/9
+
+## 5.0.2 (Nov 15, 2024)
+
+- Rewrite package in typescript
+- Update test suite from mocha to jest
+- Integrate `tsup` bundler
