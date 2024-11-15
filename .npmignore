@@ -1,6 +1,7 @@
 /*.tgz
 /src
 /test
+/coverage
 /Makefile
 /CHANGELOG.md
 /tsconfig*
