@@ -7,7 +7,7 @@ Like JSON.stringify, but doesn't throw on circular references.
 Takes the same arguments as `JSON.stringify`.
 
 ```javascript
-import { stringify } from "@merlin4/json-stringify-safe";
+import { stringify } from "json-stringify-safe";
 const circularObj = {};
 circularObj.circularRef = circularObj;
 circularObj.list = [circularObj, circularObj];
