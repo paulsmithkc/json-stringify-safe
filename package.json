@@ -1,6 +1,6 @@
 {
   "name": "@merlin4/json-stringify-safe",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "Like JSON.stringify, but doesn't blow up on circular refs.",
   "keywords": [
     "json",

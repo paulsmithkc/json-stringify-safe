@@ -19,3 +19,7 @@
 - Rewrite package in typescript
 - Update test suite from mocha to jest
 - Integrate `tsup` bundler
+
+# 5.0.4 (Nov 15, 2024)
+
+- Implement array replacers [Issue #14](https://github.com/moll/json-stringify-safe/issues/14)

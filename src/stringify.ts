@@ -4,7 +4,7 @@ export type EntryProcessor = (key: string, value: any) => any;
 
 function stringify(
   obj: any,
-  replacer?: EntryProcessor | null,
+  replacer?: EntryProcessor | string[] | null,
   space?: string | number | null,
   cycleReplacer?: EntryProcessor | null
 ): string {
@@ -16,7 +16,7 @@ function stringify(
 }
 
 function serializer(
-  replacer?: EntryProcessor | null,
+  replacer?: EntryProcessor | string[] | null,
   cycleReplacer?: EntryProcessor | null
 ): EntryProcessor {
   const stack: unknown[] = [];
@@ -29,6 +29,7 @@ function serializer(
         : '[Circular ~.' + keys.slice(0, stack.indexOf(value)).join('.') + ']';
   }
 
+
   return function (key, value) {
     if (stack.length > 0) {
       const thisPos = stack.indexOf(this);
@@ -40,7 +41,16 @@ function serializer(
     } else {
       stack.push(value);
     }
-    return !replacer ? value : replacer.call(this, key, value);
+
+    if (!replacer) {
+      return value;
+    } else if (typeof replacer === 'function') {
+      return replacer.call(this, key, value);
+    } else if (Array.isArray(replacer)) {
+      return !key || replacer.includes(key) ? value : undefined;
+    } else {
+      return value;
+    }
   };
 }
 
