@@ -1,1 +1,8 @@
 /*.tgz
+/src
+/test
+/Makefile
+/CHANGELOG.md
+/tsconfig*
+/tsup*
+/jest*
